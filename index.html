@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz with PDF Export</title>
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    // Disable right-click (context menu)
+    document.addEventListener("contextmenu", function(event) {
+      event.preventDefault();
+    });
+    document.addEventListener("keydown", function(event) {
+  // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, and Ctrl+U for Developer Tools
+  if (event.key === "F12" || 
+      (event.ctrlKey && event.shiftKey && (event.key === "I" || event.key === "J")) || 
+      (event.ctrlKey && event.key === "U")) {
+    event.preventDefault(); // Disable the default behavior (open dev tools)
+  }
+});
+
+  </script>
+</head>
+<body>
+  <div id="quiz-container">
+    <h1>Welcome to IT Computer Studies</h1>
+
+    <!-- User Input Screen -->
+    <div id="user-info">
+      <label for="user-name">Name:</label>
+      <input type="text" id="user-name" placeholder="Enter your name" />
+
+      <label for="batch-time">Batch Time:</label>
+      <input type="text" id="batch-time" placeholder="Enter your batch time" />
+
+      <button onclick="startQuiz()">Start Quiz</button>
+    </div>
+
+    <!-- Quiz Content -->
+    <div id="quiz-content" style="display: none;">
+      <h2>Quiz</h2>
+      <div id="question"></div>
+      <input type="text" id="user-answer" placeholder="Type your answer here" />
+      <button id="submit-btn" onclick="checkAnswer()">Submit</button>
+      <p id="feedback"></p>
+      <button id="next-btn" onclick="nextQuestion()" style="display: none;">Next Question</button>
+    </div>
+
+    <!-- Result Screen -->
+<div id="result-screen" style="display: none;">
+  <h2 id="result-title"></h2>
+  <div id="score-box">
+    <p id="final-score"></p>
+    <p id="personal-message"></p>
+  </div>
+  <div id="pdf-preview" style="margin-top: 20px;"></div>
+  <button id="download-btn" style="display: none;">Download PDF</button>
+  <button onclick="generatePDFPreview()">Preview Pdf</button>
+</div>
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+  <script src="script.js"></script>
+  
+</body>
+</html>
