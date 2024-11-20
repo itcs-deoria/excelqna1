@@ -3,33 +3,105 @@ body {
   margin: 0;
   padding: 20px;
   background-color: #f9f9f9;
+  margin-top: 200px;
+  background-color: #297eb7;
+  padding-bottom: 350px;
 }
-
+@font-face {
+  font-family: 'infinite';
+  src: url('InfinitS.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+#itcs{
+  font-family: infinite;
+  font-weight: 100;
+  background: linear-gradient(45deg, #6b1ddf, #5437c8, #71007b);
+  -webkit-background-clip: text;
+  color: transparent;
+}
 #quiz-container {
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #cdeaf5;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 3);
 }
 
 h1, h2 {
   text-align: center;
+ 
 }
 
 label {
   display: block;
   margin: 10px 0 5px;
+  font-weight: bold;
+  font-size: 25px;
 }
 
 input[type="text"] {
-  width: 100%;
+  width: 95%;
   padding: 10px;
   margin-bottom: 15px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 15px;
+  font-size: 25px;
+  font-weight: bold;
+  transition: box-shadow 0.3s ease-in-out;
+  animation: glow 1.5s infinite alternate;
+  color: red;
 }
+#next-btn{
+  animation: 1s shake1 infinite alternate;
+}
+@keyframes shake1 {
+  0% { transform: skewX(-30deg); }
+  5% { transform: skewX(30deg); }
+  10% { transform: skewX(-30deg); }
+  15% { transform: skewX(30deg); }
+  20% { transform: skewX(0deg); }
+  100% { transform: skewX(0deg); }  
+}
+
+#submit{
+  background: #4caf50;
+}
+#submit:hover {
+  box-shadow: 0 0 10px #37f801, 0 0 40px #38f08b; /* Glow effect */
+  transform: translateY(-2px); /* Slight lift for 3D effect */
+}
+
+/* Keyframes for the glowing effect */
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 1px rgba(214, 168, 214, 0.7), 0 0 20px rgba(219, 160, 219, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 1px rgba(255, 0, 255, 0.8), 0 0 30px rgba(255, 0, 255, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 1px rgba(255, 0, 255, 0.7), 0 0 20px rgba(255, 0, 255, 0.6);
+  }
+}
+#question {
+  font-size: 24px; /* Increase font size */
+  font-weight: bold; /* Make the text bold */
+  color: rgb(0, 0, 0);
+  opacity: 0; /* Start with invisible text */
+  animation: fadeIn 10s forwards; /* Fade in over 3 seconds */
+
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 
 button {
   display: inline-block;
@@ -49,6 +121,8 @@ button:hover {
 #feedback {
   font-weight: bold;
   margin-top: 10px;
+  font-size: 24px;
+  padding-top: 10px;
 }
 /* Result Screen Styling */
 #score-box {
@@ -122,8 +196,54 @@ button:active {
 }
 #autosubmit{
   background: red;
+  margin-left: 300px;
 }
 #autosubmit:hover {
   box-shadow: 0 0 20px #f80e01, 0 0 40px #db5609; /* Glow effect */
   transform: translateY(-2px); /* Slight lift for 3D effect */
 }
+#home{
+  background:green;
+  animation: 1s shake1 infinite alternate;
+}
+#download-btn{
+  background: red;
+  animation: 2s shake1 infinite alternate;
+}
+#preview{
+  animation: 3s shake1 infinite alternate;
+}
+/* Define the shake animation */
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-1px);
+  }
+  50% {
+    transform: translateX(1px);
+  }
+  75% {
+    transform: translatey(-1px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Style the heading */
+.move {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #e74c3c;
+  text-align: center;
+  margin: 20px auto;
+  display: inline-block;
+  animation: shake 0.5s infinite;
+  padding-left: 90px;
+  
+}
+
+
+

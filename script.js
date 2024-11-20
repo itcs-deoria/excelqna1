@@ -59,7 +59,6 @@ let results = [];
 let userName = "";
 let batchTime = "";
 
-// Start Quiz
 function startQuiz() {
   userName = document.getElementById("user-name").value.trim();
   batchTime = document.getElementById("batch-time").value.trim();
@@ -72,8 +71,19 @@ function startQuiz() {
   document.getElementById("user-info").style.display = "none";
   document.getElementById("quiz-content").style.display = "block";
 
+  // Display total questions beside the h1
+  const h3 = document.querySelector("h3");
+  const totalQuestions = document.createElement("span");
+  totalQuestions.id = "total-questions";
+  totalQuestions.style.marginLeft = "10px"; // Optional: Add some space
+  totalQuestions.style.fontSize = "18px";  // Optional: Adjust font size
+  totalQuestions.style.color = "blue";     // Optional: Adjust color
+  totalQuestions.innerText = `(Total Questions: ${questions.length})`;
+  h3.appendChild(totalQuestions);
+
   showQuestion();
 }
+
 
 // Show Question
 function showQuestion() {
@@ -115,23 +125,46 @@ function checkAnswer() {
   document.getElementById("next-btn").style.display = "inline";
 }
 // Function to send data to Google Sheets
-function sendDataToSheet(userName, batchTime, score) {
-  const url = 'https://script.google.com/macros/s/AKfycbzdah3KRzYiK5Jkjl_cXxr_lfFZOqDXHdBp964qBu9_wlE-886jU6QFztRDpL2VOjLyEg/exec'; // Replace with your Google Apps Script Web App URL
-  
-  // Create a new FormData object to send as POST request
+// Function to send data to Google Sheets
+function sendDataToSheet(userName, batchTime, score, totalQuestions, correctAnswers, wrongAnswers) {
+  const url = 'https://script.google.com/macros/s/AKfycbw8gI8aODuxMhztu41W7ZLv2xiWa_nM4H8u-wbA0cLgo9J_X50-aH21Z30azOrznU2uzA/exec'; // Replace with your Google Apps Script URL
+
+  // Get the current date and time
+  const date = new Date();
+
+  // Format the date (DD-MMM-YYYY)
+  const formattedDate = `${date.getDate()}-${date.toLocaleString("en-GB", { month: "short" })}-${date.getFullYear()}`;
+
+  // Format the time (hh:mm:ss AM/PM)
+  let hours = date.getHours();
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+  const seconds = date.getSeconds().toString().padStart(2, "0");
+  const ampm = hours >= 12 ? "PM" : "AM";
+  hours = hours % 12 || 12; // Convert to 12-hour format
+  const formattedTime = `${hours}:${minutes}:${seconds} ${ampm}`;
+
+  // Create a new FormData object
   const formData = new FormData();
   formData.append('name', userName);
   formData.append('batchTime', batchTime);
   formData.append('score', score);
-  
+  formData.append('totalQuestions', totalQuestions);
+  formData.append('correctAnswers', correctAnswers);
+  formData.append('wrongAnswers', wrongAnswers);
+  formData.append('date', formattedDate);
+  formData.append('time', formattedTime);
+
+  // Send data to Google Sheets
   fetch(url, {
     method: 'POST',
-    body: formData
+    body: formData,
   })
-  .then(response => response.text())
-  .then(data => console.log('Data sent to Google Sheets: ', data))
-  .catch(error => console.error('Error sending data: ', error));
+    .then(response => response.text())
+    .then(data => console.log('Data sent to Google Sheets: ', data))
+    .catch(error => console.error('Error sending data: ', error));
 }
+
+
 
 
 
@@ -169,9 +202,14 @@ function nextQuestion() {
       resultTitle.innerText = "😅 Better Luck Next Time 😅";
       personalMessage.innerText = "Don't give up! Keep practicing and try again.";
     }
+// Example of how to call the function
+const totalQuestions = questions.length;
+const correctAnswers = score;
+const wrongAnswers = totalQuestions - correctAnswers;
 
-    // Call the function to send data to Google Sheets after all questions are answered
-    sendDataToSheet(userName, batchTime, score);  // Send the final data to Google Sheets
+// Send data to Google Sheets
+sendDataToSheet(userName, batchTime, score, totalQuestions, correctAnswers, wrongAnswers);
+
   }
 }
 
@@ -216,9 +254,14 @@ function autoSubmit() {
     resultTitle.innerText = "😅 Better Luck Next Time 😅";
     personalMessage.innerText = "Don't give up! Keep practicing and try again.";
   }
+// Example of how to call the function
+const totalQuestions = questions.length;
+const correctAnswers = score;
+const wrongAnswers = totalQuestions - correctAnswers;
 
-  // Send data to Google Sheets (after quiz completion or auto-submit)
-  sendDataToSheet(userName, batchTime, score);  // Send the final data to Google Sheets
+// Send data to Google Sheets
+sendDataToSheet(userName, batchTime, score, totalQuestions, correctAnswers, wrongAnswers);
+
 }
 
 

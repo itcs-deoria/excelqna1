@@ -23,7 +23,10 @@
 </head>
 <body>
   <div id="quiz-container">
-    <h1>Welcome to IT Computer Studies</h1>
+    <h1>Welcome to</h1>
+    <h1 id="itcs">IT Computer Studies</h1>
+    <h2 class="move">Excel Quiz for Practice</h2>
+    <h3></h3>
 
     <!-- User Input Screen -->
     <div id="user-info">
@@ -33,14 +36,14 @@
       <label for="batch-time">Batch Time:</label>
       <input type="text" id="batch-time" placeholder="Enter your batch time" />
 
-      <button onclick="startQuiz()">Start Quiz</button>
+      <button onclick="startQuiz()" id="start">Start Quiz</button>
     </div>
 
     <!-- Quiz Content -->
     <div id="quiz-content" style="display: none;">
       <p id="question"></p>
       <input type="text" id="user-answer" placeholder="Type your answer here" />
-      <button onclick="checkAnswer()">Submit Answer</button><br>
+      <button onclick="checkAnswer()" id="submit">Submit Answer</button><br>
       <p id="feedback"></p>
       <button id="next-btn" onclick="nextQuestion()" style="display: none;">Next Question</button><br>
       <button onclick="autoSubmit()" id="autosubmit">Auto Submit</button> <!-- New Auto Submit Button -->
@@ -57,9 +60,9 @@
     <p id="personal-message"></p>
   </div>
   <div id="pdf-preview" style="margin-top: 20px;"></div>
-  <button onclick="refresh()">Go to Home</button>
+  <button onclick="refresh()" id="home">Go to Home</button>
   <button id="download-btn" style="display: none;">Download PDF</button>
-  <button onclick="generatePDFPreview() , sendToGoogleSheet(timeTaken, totalMarks)">Preview Pdf</button>
+  <button onclick="generatePDFPreview() , sendToGoogleSheet(timeTaken, totalMarks)" id="preview">Preview Pdf</button>
   
 </div>
 
