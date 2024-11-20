@@ -114,6 +114,25 @@ function checkAnswer() {
   // Show the next button to proceed to the next question
   document.getElementById("next-btn").style.display = "inline";
 }
+// Function to send data to Google Sheets
+function sendDataToSheet(userName, batchTime, score) {
+  const url = 'https://script.google.com/macros/s/AKfycbzdah3KRzYiK5Jkjl_cXxr_lfFZOqDXHdBp964qBu9_wlE-886jU6QFztRDpL2VOjLyEg/exec'; // Replace with your Google Apps Script Web App URL
+  
+  // Create a new FormData object to send as POST request
+  const formData = new FormData();
+  formData.append('name', userName);
+  formData.append('batchTime', batchTime);
+  formData.append('score', score);
+  
+  fetch(url, {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => response.text())
+  .then(data => console.log('Data sent to Google Sheets: ', data))
+  .catch(error => console.error('Error sending data: ', error));
+}
+
 
 
 
@@ -121,12 +140,14 @@ function nextQuestion() {
   currentQuestionIndex++;
 
   if (currentQuestionIndex < questions.length) {
+    // Show the next question
     showQuestion();
   } else {
+    // This block runs once all questions have been answered (i.e., last question)
     document.getElementById("quiz-content").style.display = "none";
     document.getElementById("result-screen").style.display = "block";
 
-    // Generate personalized messages
+    // Generate personalized messages based on the score
     const scorePercent = (score / questions.length) * 100;
     const resultTitle = document.getElementById("result-title");
     const finalScore = document.getElementById("final-score");
@@ -134,6 +155,7 @@ function nextQuestion() {
 
     finalScore.innerText = `${userName}, you scored ${score} out of ${questions.length}.`;
 
+    // Personalized feedback based on score
     if (scorePercent === 100) {
       resultTitle.innerText = "🌟 Perfect Score! 🌟";
       personalMessage.innerText = "Congratulations! You Top the quiz. You're amazing!";
@@ -147,8 +169,12 @@ function nextQuestion() {
       resultTitle.innerText = "😅 Better Luck Next Time 😅";
       personalMessage.innerText = "Don't give up! Keep practicing and try again.";
     }
+
+    // Call the function to send data to Google Sheets after all questions are answered
+    sendDataToSheet(userName, batchTime, score);  // Send the final data to Google Sheets
   }
 }
+
 function autoSubmit() {
   // Loop through remaining questions
   while (currentQuestionIndex < questions.length) {
@@ -190,7 +216,11 @@ function autoSubmit() {
     resultTitle.innerText = "😅 Better Luck Next Time 😅";
     personalMessage.innerText = "Don't give up! Keep practicing and try again.";
   }
+
+  // Send data to Google Sheets (after quiz completion or auto-submit)
+  sendDataToSheet(userName, batchTime, score);  // Send the final data to Google Sheets
 }
+
 
 
 async function generatePDFPreview() {
@@ -273,9 +303,4 @@ async function generatePDFPreview() {
 function refresh(){
   location.reload();
 }
-
-
-
-
-
 
