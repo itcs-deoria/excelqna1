@@ -103,7 +103,7 @@ function checkAnswer() {
     score++;
     results.push({ question: questions[currentQuestionIndex].question, userAnswer, correct: true });
   } else {
-    feedbackElement.innerText = `Wrong! Correct answer: ${correctAnswer}`;
+    feedbackElement.innerText = `Wrong! Correct answer:  ${correctAnswer}`;
     feedbackElement.style.color = "red";
     results.push({ question: questions[currentQuestionIndex].question, userAnswer, correct: false });
   }
@@ -269,7 +269,10 @@ async function generatePDFPreview() {
   };
 }
 
-
+// Refresh
+function refresh(){
+  location.reload();
+}
 
 
 

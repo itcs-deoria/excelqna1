@@ -40,10 +40,11 @@
     <div id="quiz-content" style="display: none;">
       <p id="question"></p>
       <input type="text" id="user-answer" placeholder="Type your answer here" />
-      <button onclick="checkAnswer()">Submit Answer</button>
-      <button id="next-btn" onclick="nextQuestion()" style="display: none;">Next Question</button>
-      <button onclick="autoSubmit()">Auto Submit</button> <!-- New Auto Submit Button -->
+      <button onclick="checkAnswer()">Submit Answer</button><br>
       <p id="feedback"></p>
+      <button id="next-btn" onclick="nextQuestion()" style="display: none;">Next Question</button><br>
+      <button onclick="autoSubmit()" id="autosubmit">Auto Submit</button> <!-- New Auto Submit Button -->
+      
     </div>
     
     
@@ -56,6 +57,7 @@
     <p id="personal-message"></p>
   </div>
   <div id="pdf-preview" style="margin-top: 20px;"></div>
+  <button onclick="refresh()">Go to Home</button>
   <button id="download-btn" style="display: none;">Download PDF</button>
   <button onclick="generatePDFPreview()">Preview Pdf</button>
   

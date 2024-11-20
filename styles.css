@@ -120,3 +120,10 @@ button:active {
   transform: translateY(2px); /* Pressed effect */
   box-shadow: 5px 5px 15px #1419a5, -5px -5px 15px #096586; /* Reset to 3D shadow */
 }
+#autosubmit{
+  background: red;
+}
+#autosubmit:hover {
+  box-shadow: 0 0 20px #f80e01, 0 0 40px #db5609; /* Glow effect */
+  transform: translateY(-2px); /* Slight lift for 3D effect */
+}
