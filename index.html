@@ -18,8 +18,8 @@
     event.preventDefault(); // Disable the default behavior (open dev tools)
   }
 });
-
-  </script>
+</script>
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 </head>
 <body>
   <div id="quiz-container">
@@ -38,13 +38,15 @@
 
     <!-- Quiz Content -->
     <div id="quiz-content" style="display: none;">
-      <h2>Quiz</h2>
-      <div id="question"></div>
+      <p id="question"></p>
       <input type="text" id="user-answer" placeholder="Type your answer here" />
-      <button id="submit-btn" onclick="checkAnswer()">Submit</button>
-      <p id="feedback"></p>
+      <button onclick="checkAnswer()">Submit Answer</button>
       <button id="next-btn" onclick="nextQuestion()" style="display: none;">Next Question</button>
+      <button onclick="autoSubmit()">Auto Submit</button> <!-- New Auto Submit Button -->
+      <p id="feedback"></p>
     </div>
+    
+    
 
     <!-- Result Screen -->
 <div id="result-screen" style="display: none;">
@@ -56,6 +58,7 @@
   <div id="pdf-preview" style="margin-top: 20px;"></div>
   <button id="download-btn" style="display: none;">Download PDF</button>
   <button onclick="generatePDFPreview()">Preview Pdf</button>
+  
 </div>
 
 
