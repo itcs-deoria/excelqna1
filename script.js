@@ -88,9 +88,9 @@ const questions = [
   { question: "Q15) MS Access Query कहा से data लेता है ?", correctAnswer: "Table" },
   { question: "Q16) MS Access मे दो View , Design और दूसरा ?", correctAnswer: "Datasheet" },
   { question: "Q17) MS Access में डेटा टाइप जो केवल हां या नहीं को स्टोर करता है, क्या कहलाता है?", correctAnswer: "Yes/No" },
-  { question: "Q18) MS Access में "Fees" को किस datatype में रखेंगे ?", correctAnswer: "Currency" },
+  { question: "Q18) MS Access में Fees को किस datatype में रखेंगे ?", correctAnswer: "Currency" },
   { question: "Q19) MS Access कौन सा Version पढ़ा है   (only year name)?", correctAnswer: "2016" },
-  { question: "Q20) क्या  MS Access से Software बना सकते है ? ( Yes or No ) ", correctAnswer: "Yes" }
+  { question: "Q20) क्या  MS Access से Software बना सकते है ? ( Yes or No ) ", correctAnswer: "Yes" },
 
 ];
 
